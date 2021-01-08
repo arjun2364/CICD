@@ -24,3 +24,9 @@ jobs:
       
       - name: Dotnet publish
         run: dotnet publish
+      
+      - name: Upload Build Publish Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: Publish
+          path: /home/runner/work/CICD/CICD/TestCICD/bin/Debug/netcoreapp3.1/publish/
