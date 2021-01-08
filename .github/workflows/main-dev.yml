@@ -16,9 +16,18 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - uses: actions/cache@v2
+        with:
+          path: | 
+            ~/.nuget/packages
+            !~/.nuget/packages/unwanted
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+      
       - name: Dotnet restore packages
         run: dotnet restore
-      
+        
       - name: Dotnet build
         run: dotnet build --configuration debug --no-restore
       

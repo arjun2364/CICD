@@ -16,13 +16,22 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - uses: actions/cache@v2
+        with:
+          path: | 
+            ~/.nuget/packages
+            !~/.nuget/packages/unwanted
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+          
       - name: Dotnet restore packages
         run: dotnet restore
       
       - name: Dotnet build
         run: dotnet build --configuration release --no-restore
       
-      - name: Dotnet publish
+      - name: Dotnet publish -c release
         run: dotnet publish
       
       - name: Upload Build Publish Artifact
