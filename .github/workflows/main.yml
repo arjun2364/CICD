@@ -20,7 +20,7 @@ jobs:
         run: dotnet restore
       
       - name: Dotnet build
-        run: dotnet build --configuration release
+        run: dotnet build --configuration release --no-restore
       
       - name: Dotnet publish
         run: dotnet publish
