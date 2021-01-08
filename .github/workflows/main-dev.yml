@@ -16,11 +16,22 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Dotnet restore packages
-        run: dotnet restore
+      - uses: actions/checkout@master
+        
+      - uses: nuget/setup-nuget@v1
+        with:
+          nuget-version: '5.x'
+      - uses: actions/cache@v1
+        id: cache
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+      - name: NuGet Restore
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: nuget restore
       
       - name: Dotnet build
-        run: dotnet build --configuration debug
+        run: dotnet build --configuration debug --no-restore
       
       - name: Dotnet publish
         run: dotnet publish
@@ -30,3 +41,4 @@ jobs:
         with:
           name: Publish
           path: /home/runner/work/CICD/CICD/TestCICD/bin/Debug/netcoreapp3.1/publish/
+
