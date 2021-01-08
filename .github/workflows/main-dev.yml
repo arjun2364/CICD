@@ -1,4 +1,4 @@
-name: CI CD
+name: CI CD(dev)
 
 on:
   push:
@@ -20,7 +20,7 @@ jobs:
         run: dotnet restore
       
       - name: Dotnet build
-        run: dotnet build
+        run: dotnet build --configuration debug
       
       - name: Dotnet publish
         run: dotnet publish
