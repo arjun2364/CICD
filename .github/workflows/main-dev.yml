@@ -39,3 +39,15 @@ jobs:
         with:
           name: Publish
           path: /home/runner/work/CICD/CICD/TestCICD/bin/Debug/netcoreapp3.1/publish/
+          
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:
+          # Paste output of `az ad sp create-for-rbac` as value of secret variable: AZURE_CREDENTIALS
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      
+      - name: Deploy to Azure Container Instances
+        uses: Azure/aci-deploy@v1
+        with:
+          # Name of the Resource Group in which the Container Instance will be created
+          resource-group: 'myResourceGroup'
