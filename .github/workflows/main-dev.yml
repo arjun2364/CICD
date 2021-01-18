@@ -50,4 +50,4 @@ jobs:
         uses: Azure/aci-deploy@v1
         with:
           # Name of the Resource Group in which the Container Instance will be created
-          resource-group: 'myResourceGroup'
+          resource-group: 'myResourceGroup' 
