@@ -13,12 +13,14 @@ jobs:
   build:
     runs-on: windows-latest
     env:
+      PROJECT_DIRECTORY_PATH: "TestCICD"
       IIS_SERVER_COMPUTER_NAME: ${{ secrets.IIS_SERVER_COMPUTER_NAME }}
       IIS_WEBSITE_NAME: ${{ secrets.IIS_WEBSITE_NAME }}
       IIS_SERVER_USERNAME: ${{ secrets.IIS_SERVER_USERNAME }}
       IIS_SERVER_PASSWORD: ${{ secrets.IIS_SERVER_PASSWORD }}
       RECYCLE_APP_NAME: ${{ secrets.RECYCLE_APP_NAME }}
       WEBSITE_CONTENT_PATH: ${{ secrets.WEBSITE_CONTENT_PATH }}
+    
     steps:
       - uses: actions/checkout@v2
       - name: Setup .NET Core
@@ -26,11 +28,6 @@ jobs:
         with:
           dotnet-version: 3.1.101
           
-      - name: Setup node
-        uses: actions/setup-node@v2
-        with:
-          node-version: '12'
-
       - uses: actions/cache@v2
         with:
           path: | 
@@ -48,6 +45,9 @@ jobs:
       
       - name: Dotnet publish
         run: dotnet publish
+           ${{ env.PROJECT_DIRECTORY_PATH }}/${{ env.PROJECT_DIRECTORY_PATH }}.csproj
+           --source https://api.nuget.org/v3/index.json
+           --configuration Debug
       
       - name: Upload Build Publish Artifact
         uses: actions/upload-artifact@v2
@@ -55,11 +55,6 @@ jobs:
           name: Publish
           path: D:\a\CICD\CICD\TestCICD\bin\Debug\netcoreapp3.1\publish\
           
-      - name: Azure Login
-        uses: Azure/login@v1
-        with:
-          # Paste output of `az ad sp create-for-rbac` as value of secret variable: AZURE_CREDENTIALS
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
       
       - name: Stop Application Pool
         shell: cmd
