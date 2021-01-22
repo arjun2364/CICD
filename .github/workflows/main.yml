@@ -1,16 +1,16 @@
-name: CI CD(dev)
+name: CI CD(master)
 
 on:
   push:
     branches:
-      - dev
+      - master
   pull_request:
     branches:
-      - dev
+      - master
 
 jobs:
 
-  build:
+  build_and_deploy:
     runs-on: windows-latest
     env:
       PROJECT_DIRECTORY_PATH: "TestCICD"
