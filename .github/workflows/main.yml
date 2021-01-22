@@ -1,12 +1,12 @@
-name: CI CD(dev)
+name: CI CD(master)
 
 on:
   push:
     branches:
-      - dev
+      - master
   pull_request:
     branches:
-      - dev
+      - master
 
 jobs:
 
