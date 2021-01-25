@@ -66,7 +66,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build started webhook
         shell: cmd
-        run: curl.exe -H "Content-Type:application/json" -d "{"username":"Application","text":"Application_IOS_EnterpriseBuild","attachments":[{"color":"#F35A00","fields":[{"title":"Pipeline","value":"'"$(Agent.JobName)"'","short":true}]},{"color":"#F35A00","fields":[{"title":"commit_sha","value":"'"$GIT_RELEASE_NOTES "'","short":true}]},{"color":"#F35A00","fields":[{"title":"Status","value":"'"Started"'","short":true}]}]}" ${{ secrets.WEBHOOK_URI }}
+        run: curl.exe -H "Content-Type:application/json" --data-urlencode "payload={"username":"Application","text":"Application_IOS_EnterpriseBuild","attachments":[{"color":"#F35A00","fields":[{"title":"Pipeline","value":"'"$(Agent.JobName)"'","short":true}]},{"color":"#F35A00","fields":[{"title":"commit_sha","value":"'"$GIT_RELEASE_NOTES "'","short":true}]},{"color":"#F35A00","fields":[{"title":"Status","value":"'"Started"'","short":true}]}]}" ${{ secrets.WEBHOOK_URI }}
       
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
