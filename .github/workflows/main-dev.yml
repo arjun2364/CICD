@@ -64,12 +64,11 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2
-      - name: Invoke deployment hook
-        uses: distributhor/workflow-webhook@v1
-        env:
-          webhook_type: 'json-extended'
-          webhook_url: ${{ secrets.WEBHOOK_URL }}
-          data: '{ "weapon": "hammer", "drink" : "beer" }'
+      - uses: satak/webrequest-action@master
+        with:
+          url: ${{ secrets.WEBHOOK_URI }}
+          method: POST
+          payload: '{"name": "arjun"}'
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
         with:
