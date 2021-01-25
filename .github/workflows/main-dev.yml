@@ -72,4 +72,4 @@ jobs:
         with: 
           app-name: testCICD5 # Replace with your app name
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE  }} # Define secret variable in repository settings as per action documentation
-          package: '%CD%\${{ env.PROJECT_DIRECTORY_PATH }}\bin\Debug\netcoreapp3.1\Publish\'
+          package: D:\a\CICD\CICD\TestCICD\bin\Debug\netcoreapp3.1\publish\
