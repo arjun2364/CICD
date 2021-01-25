@@ -64,9 +64,9 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2
-      - name: Start Application Pool
+      - name: Build started webhook
         shell: cmd
-        run: 'curl --request POST --url "${{ secrets.WEBHOOK_URI }}" --data "hello"'
+        run: curl.exe -H "Content-Type:application/json" -d "{'text':'Hello World'}" ${{ secrets.WEBHOOK_URI }}
 
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
