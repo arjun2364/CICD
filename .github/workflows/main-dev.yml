@@ -64,13 +64,12 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2
-      - name: Send a message to Microsoft Teams
-        uses: aliencube/microsoft-teams-actions@v0.8.0
-        with:
-          webhook_uri: https://outlook.office.com/webhook/<GUID>/IncomingWebhook/<GUID>
-          summary: Build started
-          sections: '[{ "activityTitle": "hello world" }]'
-          actions: '[{ "@type": "OpenUri", "name": "lorem ipsum", "targets": [{ "os": "default", "uri": "https://localhost" }] }]'
+      - name: Invoke deployment hook
+        uses: distributhor/workflow-webhook@v1
+        env:
+          webhook_type: 'json-extended'
+          webhook_url: ${{ secrets.WEBHOOK_URL }}
+          data: '{ "weapon": "hammer", "drink" : "beer" }'
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
         with:
