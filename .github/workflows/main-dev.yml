@@ -1,4 +1,4 @@
-name: CI CD(dev)
+yname: CI CD(dev)
 
 on:
   push:
@@ -124,11 +124,11 @@ jobs:
           app-name: testCICD5 # Replace with your app name
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE  }} # Define secret variable in repository settings as per action documentation
           package: D:\a\CICD\CICD\TestCICD\bin\Debug\netcoreapp3.1\publish\
-      - name: Build completed
+      - name: Deploy completed
         if: ${{ success() }}
         shell: cmd
-        run: curl.exe -H "Content-Type:application/json" -d "{'text':'Build completed'}" ${{ secrets.WEBHOOK_URI }}
-      - name: Failure
+        run: curl.exe -H "Content-Type:application/json" -d "{'text':'Deploy completed'}" ${{ secrets.WEBHOOK_URI }}
+      - name: Build and deploy failure
         if: ${{ failure() }}
         shell: cmd
-        run: curl.exe -H "Content-Type:application/json" -d "{'text':'Build failed'}" ${{ secrets.WEBHOOK_URI }}
+        run: curl.exe -H "Content-Type:application/json" -d "{'text':'Build and deploy failed'}" ${{ secrets.WEBHOOK_URI }}
