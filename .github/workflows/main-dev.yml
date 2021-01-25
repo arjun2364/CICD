@@ -1,4 +1,4 @@
-yname: CI CD(dev)
+name: CI CD(dev)
 
 on:
   push:
