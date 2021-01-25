@@ -12,6 +12,7 @@ jobs:
 
   build:
     runs-on: windows-latest
+    if: github.event_name == 'pull_request'
     env:
       PROJECT_DIRECTORY_PATH: "TestCICD"
       IIS_SERVER_COMPUTER_NAME: ${{ secrets.IIS_SERVER_COMPUTER_NAME }}
@@ -51,6 +52,7 @@ jobs:
             
   build_and_deploy:
     runs-on: windows-latest
+    if: github.event_name == 'push'
     env:
       PROJECT_DIRECTORY_PATH: "TestCICD"
       IIS_SERVER_COMPUTER_NAME: ${{ secrets.IIS_SERVER_COMPUTER_NAME }}
