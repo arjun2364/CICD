@@ -132,4 +132,3 @@ jobs:
         if: ${{ failure() }}
         shell: cmd
         run: curl.exe -H "Content-Type:application/json" -d "{'text':'Build and deploy failed'}" ${{ secrets.WEBHOOK_URI }}
-
