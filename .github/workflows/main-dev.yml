@@ -66,7 +66,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build started webhook
         shell: cmd
-        run: curl.exe -H "Content-Type:application/json" -d "{{"@context":"http://schema.org/extensions","@type":"MessageCard", "text":"Hello World"}}" ${{ secrets.WEBHOOK_URI }}
+        run: curl.exe -H "Content-Type:application/json" -d "{'text':'Build started'}" ${{ secrets.WEBHOOK_URI }}
       
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
